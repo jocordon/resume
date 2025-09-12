@@ -129,6 +129,7 @@
     .pdf-export {
       --text-color: #333;
     }
+    .pdf-export, .pdf-export * { animation: none !important; transition: none !important; }
 
     /* Print-specific styles */
     @media print {
@@ -174,7 +175,7 @@
       </div>
 
       <div class="header-content">
-        <img src="foto/foto.JPG" alt="Foto de perfil" class="profile-pic" data-i18n-alt="alt.profilepic">
+        <img src="foto/foto.JPG" alt="Foto de perfil" class="profile-pic" data-i18n-alt="alt.profilepic" crossorigin="anonymous">
         <div class="personal-info">
           <h1 id="name">Jorge Ovidio Cordon Guzman</h1>
           <div class="title" data-i18n="title">Systems Administrator</div>
@@ -569,10 +570,12 @@
         html2canvas:  { 
             scale: 2, 
             useCORS: true, 
+            allowTaint: true,
             logging: true,
             backgroundColor: '#ffffff',
             windowWidth: document.documentElement.scrollWidth,
             windowHeight: document.documentElement.scrollHeight,
+            foreignObjectRendering: true,
             removeContainer: true
         },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
@@ -591,6 +594,8 @@
           ? 'There was an error generating the PDF. Please check your internet connection (to load the PDF library) and try again.'
           : 'Hubo un error al generar el PDF. Verifica tu conexión a internet (para cargar la librería de PDF) y vuelve a intentarlo.';
         alert(msg);
+        // Fallback to browser print as an alternative PDF generation
+        try { window.print(); } catch (_) {}
       } finally {
         // Restore view
         document.body.classList.remove('pdf-export');
