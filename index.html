@@ -511,35 +511,21 @@
 
       const element = $('.container');
       const headerControls = $('.header-top');
-      const fontAwesomeLink = $('link[href*="font-awesome"]');
       const pdfButton = $('#download-pdf');
       const originalButtonText = pdfButton.textContent;
 
       // --- Pre-generation setup ---
       pdfButton.disabled = true;
       pdfButton.textContent = lang === 'en' ? 'Generating...' : 'Generando...';
-
-      // 1. Disable animations and hide controls
-      element.style.animation = 'none';
-      element.style.opacity = 1; // IMPORTANTE: Asegurar que el elemento sea visible para la captura
+      
+      // Hide controls for printing
       headerControls.style.display = 'none';
-
-      // 2. Temporarily remove Font Awesome to prevent cross-origin issues
-      if (fontAwesomeLink) fontAwesomeLink.remove();
-
-      // 3. Ensure all images are loaded before capture
-      const images = $$('img', element);
-      const promises = images.map(img => {
-        if (img.complete) return Promise.resolve();
-        return new Promise(resolve => { img.onload = img.onerror = resolve; });
-      });
-      await Promise.all(promises);
 
       const opt = {
         margin:       [0.5, 0.5, 0.5, 0.5],
         filename:     filename,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, logging: false }, // Se bajó la escala para mejorar rendimiento
+        html2canvas:  { scale: 2, useCORS: true, logging: true },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
 
@@ -548,12 +534,10 @@
         await html2pdf().from(element).set(opt).save();
       } catch (err) {
         console.error("PDF generation failed:", err);
-        alert("Lo sentimos, ocurrió un error al generar el PDF. Esto puede ser un problema al mezclar archivos locales y remotos. Por favor, inténtelo de nuevo.");
+        alert("Sorry, there was an error generating the PDF. This can be due to a conflict between local and remote files. Please try again.");
       } finally {
+        // Restore view
         headerControls.style.display = 'flex';
-        if (fontAwesomeLink) document.head.appendChild(fontAwesomeLink);
-        element.style.opacity = ''; // Restablecer la opacidad inline
-        element.style.animation = ''; // Restore animation
         pdfButton.disabled = false;
         pdfButton.textContent = originalButtonText;
       }
