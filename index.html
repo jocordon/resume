@@ -32,6 +32,8 @@
       opacity: 0;
       animation: fadeInUp 0.8s ease-out 0.2s forwards;
     }
+    /* Force visibility when exporting */
+    .container.exporting { opacity: 1 !important; animation: none !important; transform: none !important; }
 
     /* Header */
     .profile-pic {
@@ -531,6 +533,15 @@
       });
     }
 
+    function waitForImages(root=document) {
+      const imgs = Array.from(root.querySelectorAll('img'));
+      const pending = imgs.filter(img => !img.complete || img.naturalWidth === 0);
+      if (!pending.length) return Promise.resolve();
+      return Promise.all(pending.map(img => new Promise(res => {
+        img.onload = img.onerror = () => res();
+      })));
+    }
+
     async function generatePdf() {
       const lang = $('#lang').value;
       const name = $('#name').textContent.trim();
@@ -548,6 +559,7 @@
       
       // Add class to force solid colors and hide controls
       document.body.classList.add('pdf-export');
+      element.classList.add('exporting');
       headerControls.style.display = 'none';
 
       const opt = {
@@ -559,14 +571,9 @@
             useCORS: true, 
             logging: true,
             backgroundColor: '#ffffff',
-            onclone: (doc) => {
-                // Ensure the container is fully visible in the cloned document
-                const container = doc.querySelector('.container');
-                if (container) {
-                    container.style.opacity = 1;
-                    container.style.animation = 'none';
-                }
-            }
+            windowWidth: document.documentElement.scrollWidth,
+            windowHeight: document.documentElement.scrollHeight,
+            removeContainer: true
         },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
@@ -575,8 +582,9 @@
       try {
         // Make sure the library is present
         await ensureHtml2Pdf();
+        await waitForImages(element);
         if (!window.html2pdf) throw new Error('html2pdf is not available');
-        await html2pdf().from(element).set(opt).save();
+        await html2pdf().set(opt).from(element).save();
       } catch (err) {
         console.error("PDF generation failed:", err);
         const msg = lang === 'en'
@@ -586,6 +594,7 @@
       } finally {
         // Restore view
         document.body.classList.remove('pdf-export');
+        element.classList.remove('exporting');
         headerControls.style.display = 'flex';
         pdfButton.disabled = false;
         pdfButton.textContent = originalButtonText;
