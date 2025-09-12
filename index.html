@@ -123,6 +123,11 @@
       }
     }
 
+    /* PDF Export Style Override */
+    .pdf-export {
+      --text-color: #333;
+    }
+
     /* Print-specific styles */
     @media print {
       body { background-color: #fff; font-size: 10pt; }
@@ -332,7 +337,7 @@
         <div class="language">
           <div data-i18n="lang.es">Español</div>
           <div class="language-level spanish"></div>
-          <div data-i18n="lang.es.level">Nativo</div>
+          <div data-i1-n="lang.es.level">Nativo</div>
         </div>
         <div class="language">
           <div data-i18n="lang.en">Inglés</div>
@@ -349,7 +354,7 @@
 
   <script>
     const $ = (sel, root = document) => root.querySelector(sel);
-    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+    const $ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
     const translations = {
       es: {
@@ -484,12 +489,12 @@
  
     function setLang(lang) {
       const dict = translations[lang] || translations.es;
-      $$('[data-i18n]').forEach(el => {
+      $('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (dict[key] !== undefined) el.textContent = dict[key];
       });
       // Also translate attributes like 'alt'
-      $$('[data-i18n-alt]').forEach(el => {
+      $('[data-i18n-alt]').forEach(el => {
         const key = el.getAttribute('data-i18n-alt');
         if (dict[key] !== undefined) el.alt = dict[key];
       });
@@ -518,14 +523,27 @@
       pdfButton.disabled = true;
       pdfButton.textContent = lang === 'en' ? 'Generating...' : 'Generando...';
       
-      // Hide controls for printing
+      // Add class to force solid colors and hide controls
+      document.body.classList.add('pdf-export');
       headerControls.style.display = 'none';
 
       const opt = {
         margin:       [0.5, 0.5, 0.5, 0.5],
         filename:     filename,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, logging: true },
+        html2canvas:  { 
+            scale: 2, 
+            useCORS: true, 
+            logging: true,
+            onclone: (doc) => {
+                // Ensure the container is fully visible in the cloned document
+                const container = doc.querySelector('.container');
+                if (container) {
+                    container.style.opacity = 1;
+                    container.style.animation = 'none';
+                }
+            }
+        },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
 
@@ -537,6 +555,7 @@
         alert("Sorry, there was an error generating the PDF. This can be due to a conflict between local and remote files. Please try again.");
       } finally {
         // Restore view
+        document.body.classList.remove('pdf-export');
         headerControls.style.display = 'flex';
         pdfButton.disabled = false;
         pdfButton.textContent = originalButtonText;
