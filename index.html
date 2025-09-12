@@ -138,6 +138,8 @@
     .pdf-export .skill-category { page-break-inside: avoid; break-inside: avoid-page; }
     /* Start Education on a new page to avoid splitting the heading */
     .pdf-export section.education { page-break-before: always; break-before: page; }
+    /* Also start Skills on a new page */
+    .pdf-export section.skills { page-break-before: always; break-before: page; }
 
     /* Print-specific styles */
     @media print {
@@ -163,6 +165,8 @@
       }
       .language-level::after { background: #333 !important; }
       footer { padding: 10px 0; }
+      /* Print fallback: force page break before Skills */
+      section.skills { page-break-before: always; }
     }
   </style>
   <link rel="stylesheet" href="lib/fontawesome/css/all.min.css">
