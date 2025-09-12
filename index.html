@@ -138,8 +138,7 @@
     .pdf-export .skill-category { page-break-inside: avoid; break-inside: avoid-page; }
     /* Start Education on a new page to avoid splitting the heading */
     .pdf-export section.education { page-break-before: always; break-before: page; }
-    /* Also start Skills on a new page */
-    .pdf-export section.skills { page-break-before: always; break-before: page; }
+    /* Skills page break handled by explicit .page-break element */
     /* Explicit page-break element */
     .page-break { display: none; }
     .pdf-export .page-break { display: block; height: 0; page-break-before: always; break-before: page; }
@@ -168,8 +167,7 @@
       }
       .language-level::after { background: #333 !important; }
       footer { padding: 10px 0; }
-      /* Print fallback: force page break before Skills */
-      section.skills { page-break-before: always; }
+      /* Print fallback uses explicit .page-break element */
       .page-break { display: block; height: 0; page-break-before: always; }
     }
   </style>
