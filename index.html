@@ -130,6 +130,14 @@
       --text-color: #333;
     }
     .pdf-export, .pdf-export * { animation: none !important; transition: none !important; }
+    /* Avoid awkward page breaks while exporting to PDF */
+    .pdf-export h2 { page-break-after: avoid; break-after: avoid-page; }
+    .pdf-export .experience-item,
+    .pdf-export .education-item,
+    .pdf-export .certification-item,
+    .pdf-export .skill-category { page-break-inside: avoid; break-inside: avoid-page; }
+    /* Start Education on a new page to avoid splitting the heading */
+    .pdf-export section.education { page-break-before: always; break-before: page; }
 
     /* Print-specific styles */
     @media print {
@@ -157,7 +165,7 @@
       footer { padding: 10px 0; }
     }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="lib/fontawesome/css/all.min.css">
   <script src="lib/html2pdf.bundle.min.js" defer></script>
 </head>
 <body>
@@ -574,6 +582,7 @@
             logging: true,
             backgroundColor: '#ffffff'
         },
+        pagebreak:    { mode: ['css', 'legacy'] },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
 
