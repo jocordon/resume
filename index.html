@@ -136,8 +136,7 @@
     .pdf-export .education-item,
     .pdf-export .certification-item,
     .pdf-export .skill-category { page-break-inside: avoid; break-inside: avoid-page; }
-    /* Start Education on a new page to avoid splitting the heading */
-    .pdf-export section.education { page-break-before: always; break-before: page; }
+    /* Education relies on h2 avoid rule; no forced break */
     /* Skills page break handled by explicit .page-break element */
     /* Explicit page-break element */
     /*.page-break { display: none; }*/
@@ -589,7 +588,7 @@
             logging: true,
             backgroundColor: '#ffffff'
         },
-        pagebreak:    { mode: ['css', 'legacy'] },
+        pagebreak:    { mode: ['css'] },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
 
