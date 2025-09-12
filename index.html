@@ -354,7 +354,7 @@
 
   <script>
     const $ = (sel, root = document) => root.querySelector(sel);
-    const $ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
     const translations = {
       es: {
@@ -476,7 +476,7 @@
         cert7: 'MS 70-270 Windows XP Professional',
         'section.skills': 'Technical skills',
         'skills.os': 'Operating systems',
-        'skills.virt': 'Virtualization',
+        'skills.virt': 'Virtualización',
         'skills.net': 'Infrastructure',
         'section.langs': 'Languages',
         'lang.es': 'Spanish',
@@ -489,12 +489,12 @@
  
     function setLang(lang) {
       const dict = translations[lang] || translations.es;
-      $('[data-i18n]').forEach(el => {
+      $$('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (dict[key] !== undefined) el.textContent = dict[key];
       });
       // Also translate attributes like 'alt'
-      $('[data-i18n-alt]').forEach(el => {
+      $$('[data-i18n-alt]').forEach(el => {
         const key = el.getAttribute('data-i18n-alt');
         if (dict[key] !== undefined) el.alt = dict[key];
       });
