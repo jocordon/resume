@@ -521,6 +521,7 @@
 
       // 1. Disable animations and hide controls
       element.style.animation = 'none';
+      element.style.opacity = 1; // IMPORTANTE: Asegurar que el elemento sea visible para la captura
       headerControls.style.display = 'none';
 
       // 2. Temporarily remove Font Awesome to prevent cross-origin issues
@@ -538,7 +539,7 @@
         margin:       [0.5, 0.5, 0.5, 0.5],
         filename:     filename,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 4, useCORS: true, logging: false },
+        html2canvas:  { scale: 2, useCORS: true, logging: false }, // Se bajó la escala para mejorar rendimiento
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
 
@@ -551,6 +552,7 @@
       } finally {
         headerControls.style.display = 'flex';
         if (fontAwesomeLink) document.head.appendChild(fontAwesomeLink);
+        element.style.opacity = ''; // Restablecer la opacidad inline
         element.style.animation = ''; // Restore animation
         pdfButton.disabled = false;
         pdfButton.textContent = originalButtonText;
