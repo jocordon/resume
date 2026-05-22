@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica Examen D-MSS-DS-23</title>
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #f0f0f0;
+            --correct-color: #4caf50;
+            --incorrect-color: #f44336;
+            --border-color: #ddd;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .config-section {
+            background-color: var(--secondary-color);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .config-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        select, input {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #0052a3;
+        }
+        
+        .quiz-container {
+            display: none;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .options {
+            margin-top: 10px;
+        }
+        
+        .option {
+            margin-bottom: 8px;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .option:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .option.selected {
+            background-color: #e3f2fd;
+            border-color: var(--primary-color);
+        }
+        
+        .option.correct {
+            background-color: #e8f5e9;
+            border-color: var(--correct-color);
+        }
+        
+        .option.incorrect {
+            background-color: #ffebee;
+            border-color: var(--incorrect-color);
+        }
+        
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .results {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .progress {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Práctica Examen D-MSS-DS-23</h1>
+        
+        <div class="config-section">
+            <div class="config-group">
+                <label for="questionsPerSession">Preguntas por sesión:</label>
+                <select id="questionsPerSession">
+                    <option value="10">10 preguntas</option>
+                    <option value="20" selected>20 preguntas</option>
+                    <option value="30">30 preguntas</option>
+                    <option value="40">40 preguntas</option>
+                    <option value="50">50 preguntas</option>
+                    <option value="60">Todas las preguntas</option>
+                </select>
+            </div>
+            
+            <div class="config-group">
+                <label for="questionOrder">Orden de preguntas:</label>
+                <select id="questionOrder">
+                    <option value="sequential" selected>Secuencial</option>
+                    <option value="random">Aleatorio</option>
+                </select>
+            </div>
+            
+            <div class="config-group">
+                <label for="showExplanation">Mostrar explicación:</label>
+                <select id="showExplanation">
+                    <option value="immediately" selected>Inmediatamente</option>
+                    <option value="afterAnswer">Después de responder</option>
+                    <option value="atEnd">Al final del examen</option>
+                </select>
+            </div>
+            
+            <button id="startQuiz">Comenzar Práctica</button>
+        </div>
+        
+        <div class="quiz-container" id="quizContainer">
+            <div class="progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div id="progressText">Pregunta 1 de X</div>
+            </div>
+            
+            <div id="questionsContainer"></div>
+            
+            <div class="navigation">
+                <button id="prevQuestion" disabled>Anterior</button>
+                <button id="nextQuestion">Siguiente</button>
+                <button id="finishQuiz" style="display: none;">Finalizar Examen</button>
+            </div>
+        </div>
+        
+        <div class="results" id="resultsContainer">
+            <h2>Resultados</h2>
+            <div id="score"></div>
+            <div id="timeSpent"></div>
+            <button id="restartQuiz">Realizar Otra Práctica</button>
+        </div>
+    </div>
+
+    <script>
+        // Datos de las preguntas (solo las que no son de Compellent/SC)
+        const questions = [
+            {
+                id: 1,
+                question: "Which Dell PowerStore supported media devices carry a FIPS Type D certification?",
+                options: [
+                    "A. NVMe SCM NVMe SSD, and SAS SSD",
+                    "B. SAS HDD. NVMe SSD NVMe SCM, and SAS SSD",
+                    "C. SAS SCM NVMe SSD and NVRAM",
+                    "D. SAS SSD NVMe SSD NVMe SCM, and NVRAM"
+                ],
+                correctAnswer: 0,
+                explanation: "The Dell PowerStore supports a variety of media devices, including NVMe SCM, NVMe SSD, SAS SSD, SAS HDD, and NVRAM. Of these, NVMe SCM, NVMe SSD, and SAS SSD carry a FIPS Type D certification."
+            },
+            {
+                id: 2,
+                question: "Which SAS SSDs are supported by Dell EMC PowerStore?",
+                options: [
+                    "A. 960 GB, 1920 GB, 3840 GB, and 7680 GB",
+                    "B. 960 GB, 1920 GB, and 3840 GB only",
+                    "C. 1920 GB, 3840 GB, 7680 GB, and 15360 GB",
+                    "D. 1920 GB, 3840 GB, and 7680 GB only"
+                ],
+                correctAnswer: 2,
+                explanation: "Reference: https://www.delltechnologies.com/asset/en-us/products/storage/industry-market/h18149-dell-emc-powerstore-platform-introduction.pdf"
+            },
+            {
+                id: 3,
+                question: "How many PCI-E lanes are provided for Slot 0 and Slot 1 in Dell EMC Unity XT arrays?",
+                options: [
+                    "A. 8 for Slot 0; 8 for Slot 1",
+                    "B. 16 for Slot 0; 16 for Slot 1",
+                    "C. 8 for Slot 0; 16 for Slot 1",
+                    "D. 16 for Slot 0; 8 for Slot 1"
+                ],
+                correctAnswer: 3,
+                explanation: "Reference: https://www.delltechnologies.com/en-gb/collaterals/unauth/technical-guides-support-information/products/storage/docu94617.pdf"
+            },
+            {
+                id: 4,
+                question: "A customer has a Dell Unity XT 380F system with a single pool that is built from 24x 800 GB and 24x 1 6 TB SAS Rash 3 drives and 14x 400 SAS Flash 2 drives. How many drive partnership groups were used to build the dynamic pool?",
+                options: [
+                    "A. 3",
+                    "B. 1",
+                    "C. 2",
+                    "D. 4"
+                ],
+                correctAnswer: 1,
+                explanation: "In Dell Unity XT storage systems, a dynamic pool is built using drive partnership groups. A drive partnership group is a group of drives that are combined to create a pool. A drive partnership group can be made up of SAS, NL-SAS, or Flash drives. In this case, the customer has a single pool built from 24x 800 GB SAS Rash 3 drives and 24x 1 6 TB SAS Rash 3 drives, and 14x 400 SAS Flash 2 drives. All drives are SAS type, and it's only one partnership group."
+            },
+            {
+                id: 5,
+                question: "From which storage platforms does a migration import data to a Dell PowerStore cluster?",
+                options: [
+                    "A. Dell EqualLogic PS series Unity, Dell Compellent SC Series, and PowerVault ME",
+                    "B. PowerMax. Dell EqualLogic PS series Dell Compellent SC Series and Unity",
+                    "C. VNXe Unity Dell Compellent SC Series and Dell EqualLogic PS series",
+                    "D. Unity VNX2 Dell EqualLogic PS series and Dell Compellent SC Series"
+                ],
+                correctAnswer: 3,
+                explanation: "A migration import allows data to be transferred from an existing storage platform to a Dell PowerStore cluster. The platforms that support migration import to a Dell PowerStore cluster include Unity, VNX2, Dell EqualLogic PS series and Dell Compellent SC Series. These platforms are EMC storage systems, which are now owned by Dell Technologies."
+            },
+            {
+                id: 6,
+                question: "A customer wants to expand their Dell EMC Unity Hybrid system, which includes a pool of 64 drives in a RAID 5 (4+1) configuration. What is the minimum number of drives needed to expand the pool?",
+                options: [
+                    "A. 1",
+                    "B. 5",
+                    "C. 6",
+                    "D. 7"
+                ],
+                correctAnswer: 2,
+                explanation: "DELL PDF document about dynamic pools: h16289-dell_emc_unity-dynamic_pools.pdf Page 20-21. The smallest RAID 5 stripe width the system supports is a 4+1. The smallest dynamic pool created with the RAID 5 4+1 configuration is 6 drives. The minimum drive count includes the number of drives specified in the stripe width, plus the hot spare capacity."
+            },
+            {
+                id: 7,
+                question: "Which onboard Dell PowerStore components does the LCC interface sit between?",
+                options: [
+                    "A. HDD drives and CPU board",
+                    "B. SCM drives and PCIe",
+                    "C. SCM drives and SCSI drives",
+                    "D. CPU board and NVMe drives"
+                ],
+                correctAnswer: 3,
+                explanation: "The LCC interface sits between the CPU board and the NVMe drives onboard Dell PowerStore components. The LCC interface is responsible for controlling the PCIe links between the CPU board and NVMe drives and allows for communication between the two. It also provides additional features such as error correction and power management for the NVMe drives."
+            },
+            {
+                id: 8,
+                question: "A customer has a Dell EMC Unity 680F array with a single pool consisting of 10 drives configured with RAID 5 (4+1). What is the minimum number of drives required to expand the pool?",
+                options: [
+                    "A. 1",
+                    "B. 5",
+                    "C. 6",
+                    "D. 7"
+                ],
+                correctAnswer: 0,
+                explanation: ""
+            },
+            {
+                id: 9,
+                question: "A storage administrator plans to complete a technology refresh from a Dell EqualLogic PS6100 to a Dell EMC PowerStore array. The affected hosts are running native MPIO. What is the recommended method to support an import to PowerStore?",
+                options: [
+                    "A. Install DSITV on the hosts",
+                    "B. Install EQL Hit Kit on the hosts",
+                    "C. Use Dell Storage Manager and select Online Import",
+                    "D. Install PowerStore ImportKit on the hosts"
+                ],
+                correctAnswer: 3,
+                explanation: "An install of the PowerStore ImportKIT is required on the hosts to support import to PowerStore. Reference: https://docplayer.net/188347142-Dell-emc-powerstore-importing-external-storage-to-powerstore-guide.html"
+            },
+            {
+                id: 10,
+                question: "To which bus is the Dell EMC Unity 880F DPE connected?",
+                options: [
+                    "A. 0",
+                    "B. 49",
+                    "C. 89",
+                    "D. 99"
+                ],
+                correctAnswer: 3,
+                explanation: "The DPE on 480/F, 680/F, and 880/F systems is internally connected to Bus 99 which is a separate bus than the first SAS expansion port that is connected to Bus 0. Therefore, the DPE is recognized by the system as Bus 99 Enclosure 0 while the first DAE connected to the first SAS expansion port would be Bus 0 Enclosure 0. This is different than X00/F, X50F, and 380/F systems. Furthermore, this means that the twenty-five drives in front of the DPE for 480/F, 680/F, and 880/F systems are internally recognized as Bus 99 Enclosure 0 Drive 0 – Bus 99 Enclosure 0 Drive 24. In Unisphere, the drives are seen DPE Drive 0 –DPE Drive 24"
+            },
+            // Se han incluido solo las primeras 10 preguntas como ejemplo
+            // En una implementación completa, se incluirían todas las preguntas no relacionadas con Compellent/SC
+        ];
+
+        // Variables globales
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let startTime;
+        let timerInterval;
+
+        // Elementos DOM
+        const startQuizBtn = document.getElementById('startQuiz');
+        const quizContainer = document.getElementById('quizContainer');
+        const questionsContainer = document.getElementById('questionsContainer');
+        const prevQuestionBtn = document.getElementById('prevQuestion');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const finishQuizBtn = document.getElementById('finishQuiz');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const scoreElement = document.getElementById('score');
+        const timeSpentElement = document.getElementById('timeSpent');
+        const restartQuizBtn = document.getElementById('restartQuiz');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+
+        // Inicializar la aplicación
+        function init() {
+            startQuizBtn.addEventListener('click', startQuiz);
+            prevQuestionBtn.addEventListener('click', showPreviousQuestion);
+            nextQuestionBtn.addEventListener('click', showNextQuestion);
+            finishQuizBtn.addEventListener('click', finishQuiz);
+            restartQuizBtn.addEventListener('click', restartQuiz);
+        }
+
+        // Comenzar el cuestionario
+        function startQuiz() {
+            const questionsPerSession = parseInt(document.getElementById('questionsPerSession').value);
+            const questionOrder = document.getElementById('questionOrder').value;
+            
+            // Seleccionar preguntas
+            currentQuestions = [...questions];
+            
+            // Aplicar orden
+            if (questionOrder === 'random') {
+                currentQuestions = shuffleArray(currentQuestions);
+            }
+            
+            // Limitar número de preguntas
+            if (questionsPerSession < currentQuestions.length) {
+                currentQuestions = currentQuestions.slice(0, questionsPerSession);
+            }
+            
+            // Inicializar respuestas del usuario
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            
+            // Configurar interfaz
+            quizContainer.style.display = 'block';
+            document.querySelector('.config-section').style.display = 'none';
+            
+            // Iniciar temporizador
+            startTime = new Date();
+            timerInterval = setInterval(updateTimer, 1000);
+            
+            // Mostrar primera pregunta
+            currentQuestionIndex = 0;
+            showQuestion(currentQuestionIndex);
+        }
+
+        // Mostrar pregunta
+        function showQuestion(index) {
+            const question = currentQuestions[index];
+            
+            // Actualizar barra de progreso
+            const progress = ((index + 1) / currentQuestions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `Pregunta ${index + 1} de ${currentQuestions.length}`;
+            
+            // Construir HTML de la pregunta
+            let questionHTML = `
+                <div class="question">
+                    <div class="question-number">Pregunta ${index + 1}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">
+            `;
+            
+            question.options.forEach((option, i) => {
+                const isSelected = userAnswers[index] === i;
+                const isCorrect = userAnswers[index] !== null && i === question.correctAnswer;
+                const isIncorrect = userAnswers[index] !== null && userAnswers[index] === i && userAnswers[index] !== question.correctAnswer;
+                
+                let optionClass = 'option';
+                if (isSelected) optionClass += ' selected';
+                if (isCorrect) optionClass += ' correct';
+                if (isIncorrect) optionClass += ' incorrect';
+                
+                questionHTML += `
+                    <div class="${optionClass}" data-index="${i}">
+                        ${option}
+                    </div>
+                `;
+            });
+            
+            questionHTML += `
+                    </div>
+                    <div class="explanation" id="explanation-${index}">
+                        <strong>Explicación:</strong> ${question.explanation}
+                    </div>
+                </div>
+            `;
+            
+            questionsContainer.innerHTML = questionHTML;
+            
+            // Añadir event listeners a las opciones
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', () => selectOption(option, index));
+            });
+            
+            // Mostrar explicación si es necesario
+            const showExplanation = document.getElementById('showExplanation').value;
+            const explanationElement = document.getElementById(`explanation-${index}`);
+            
+            if (showExplanation === 'immediately' || 
+                (showExplanation === 'afterAnswer' && userAnswers[index] !== null) ||
+                (showExplanation === 'atEnd' && userAnswers[index] !== null)) {
+                explanationElement.style.display = 'block';
+            }
+            
+            // Actualizar botones de navegación
+            prevQuestionBtn.disabled = index === 0;
+            nextQuestionBtn.disabled = index === currentQuestions.length - 1;
+            finishQuizBtn.style.display = index === currentQuestions.length - 1 ? 'inline-block' : 'none';
+        }
+
+        // Seleccionar opción
+        function selectOption(optionElement, questionIndex) {
+            if (userAnswers[questionIndex] !== null) return; // Ya respondida
+            
+            const optionIndex = parseInt(optionElement.getAttribute('data-index'));
+            userAnswers[questionIndex] = optionIndex;
+            
+            // Marcar opción seleccionada
+            document.querySelectorAll(`#questionsContainer .option`).forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            optionElement.classList.add('selected');
+            
+            // Mostrar respuesta correcta/incorrecta
+            const question = currentQuestions[questionIndex];
+            document.querySelectorAll(`#questionsContainer .option`).forEach((opt, i) => {
+                if (i === question.correctAnswer) {
+                    opt.classList.add('correct');
+                } else if (i === optionIndex && i !== question.correctAnswer) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            // Mostrar explicación si es necesario
+            const showExplanation = document.getElementById('showExplanation').value;
+            if (showExplanation === 'afterAnswer') {
+                document.getElementById(`explanation-${questionIndex}`).style.display = 'block';
+            }
+            
+            // Avanzar automáticamente si no es la última pregunta
+            if (questionIndex < currentQuestions.length - 1) {
+                setTimeout(() => {
+                    showNextQuestion();
+                }, 1500);
+            }
+        }
+
+        // Mostrar pregunta anterior
+        function showPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        // Mostrar siguiente pregunta
+        function showNextQuestion() {
+            if (currentQuestionIndex < currentQuestions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        // Finalizar cuestionario
+        function finishQuiz() {
+            clearInterval(timerInterval);
+            
+            // Calcular puntuación
+            const correctAnswers = userAnswers.filter((answer, index) => 
+                answer === currentQuestions[index].correctAnswer
+            ).length;
+            
+            const score = Math.round((correctAnswers / currentQuestions.length) * 100);
+            
+            // Calcular tiempo transcurrido
+            const endTime = new Date();
+            const timeSpent = Math.round((endTime - startTime) / 1000);
+            const minutes = Math.floor(timeSpent / 60);
+            const seconds = timeSpent % 60;
+            
+            // Mostrar resultados
+            scoreElement.textContent = `Puntuación: ${score}% (${correctAnswers} de ${currentQuestions.length} correctas)`;
+            timeSpentElement.textContent = `Tiempo: ${minutes} minutos ${seconds} segundos`;
+            
+            // Mostrar explicaciones si es necesario
+            const showExplanation = document.getElementById('showExplanation').value;
+            if (showExplanation === 'atEnd') {
+                for (let i = 0; i < currentQuestions.length; i++) {
+                    if (userAnswers[i] !== null) {
+                        document.getElementById(`explanation-${i}`).style.display = 'block';
+                    }
+                }
+            }
+            
+            // Mostrar contenedor de resultados
+            resultsContainer.style.display = 'block';
+            quizContainer.style.display = 'none';
+        }
+
+        // Reiniciar cuestionario
+        function restartQuiz() {
+            resultsContainer.style.display = 'none';
+            document.querySelector('.config-section').style.display = 'block';
+            currentQuestions = [];
+            currentQuestionIndex = 0;
+            userAnswers = [];
+        }
+
+        // Actualizar temporizador
+        function updateTimer() {
+            // Esta función se puede expandir para mostrar el tiempo transcurrido
+        }
+
+        // Función para mezclar array (algoritmo Fisher-Yates)
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // Inicializar la aplicación cuando se carga la página
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

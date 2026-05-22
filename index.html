@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jorge Cordon – Curriculum Vitae / Resume</title>
+  <title>Jorge Cordon – Technical Infrastructure Analyst / Sysadmin</title>
   <style>
     :root {
       --primary-color: #2c3e50;
@@ -14,95 +14,52 @@
       --text-color: #333;
       --background-color: #f9f9f9;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: var(--text-color);
-      background-color: var(--background-color);
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 20px auto;
-      background: #fff;
-      box-shadow: 0 0 20px rgba(0,0,0,.1);
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.2s forwards;
-    }
-    /* Force visibility when exporting */
-    .container.exporting { opacity: 1 !important; animation: none !important; transform: none !important; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-color); background-color: var(--background-color); }
+    .container { max-width: 1000px; margin: 20px auto; background: #fff; box-shadow: 0 0 20px rgba(0,0,0,.1); opacity: 0; animation: fadeInUp 0.8s ease-out 0.2s forwards; }
 
     /* Header */
-    .profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%; /* forma circular */
-      object-fit: cover;
-      border: 4px solid var(--secondary-color);
-      margin-right: 24px;
-}
-
+    .profile-pic { width: 120px; height: 120px; border-radius: 12px; object-fit: cover; border: 4px solid var(--secondary-color); background:#eee; margin-right: 24px; }
     header { background: var(--primary-color); color: #fff; padding: 20px 24px; position: relative; }
     .header-top { display: flex; gap: 12px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
     .lang-select { display: flex; gap: 8px; align-items: center; }
     .lang-select label { font-size: .9rem; opacity: .9; }
     .lang-select select { padding: 6px 10px; border-radius: 8px; border: 1px solid #0000; background: var(--light-color); color: #111; }
-
-    .pdf-button {
-      padding: 6px 12px;
-      border-radius: 8px;
-      border: none;
-      background: var(--secondary-color);
-      color: #fff;
-      cursor: pointer;
-      font-size: .9rem;
-      transition: background .2s;
-      margin-left: auto;
-    }
+    .pdf-button { padding: 6px 12px; border-radius: 8px; border: none; background: var(--secondary-color); color: #fff; cursor: pointer; font-size: .9rem; transition: background .2s; margin-left: auto; }
     .pdf-button:hover { background: var(--accent-color); }
-
     .header-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-top: 10px; }
     .personal-info { flex: 2; }
     h1 { font-size: 2.2rem; margin-bottom: 4px; }
-    .title { font-size: 1.2rem; color: var(--light-color); margin-bottom: 10px; }
-
+    .title { font-size: 1.1rem; color: var(--light-color); margin-bottom: 10px; line-height:1.4; }
     .contact-info { flex: 1; text-align: right; }
     .contact-info div { margin-bottom: 6px; display: flex; gap: 10px; justify-content: flex-end; align-items: center; }
-
     .personal-details { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; font-size: .95rem; }
     .detail-item { display: flex; align-items: center; gap: 6px; }
 
     /* Sections */
     section { padding: 22px 24px; border-bottom: 1px solid #eee; }
     h2 { color: var(--secondary-color); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-color); display: flex; align-items: center; gap: 8px; }
-
-    .summary { background: var(--light-color); padding: 18px; font-size: 1.05rem; line-height: 1.8; border-radius: 8px; }
-
+    .summary { background: var(--light-color); padding: 18px; border-radius: 8px; }
+    .summary ul { margin-left: 20px; }
+    .kpis { display: grid; grid-template-columns: repeat(2, minmax(240px,1fr)); gap: 12px; }
+    .kpi { background: var(--light-color); border-radius: 10px; padding: 10px 14px; }
+    .kpi strong { display:block; font-size:.95rem; color: var(--dark-color); }
     .experience-item { margin-bottom: 20px; }
     .job-title { font-weight: 700; font-size: 1.1rem; color: var(--dark-color); }
     .company { font-size: 1.02rem; color: var(--accent-color); margin-bottom: 4px; }
-    .dates { color: #555; opacity: .9; font-style: italic; margin-bottom: 8px; }
+    .dates { color: #0f172a; opacity: .9; font-style: italic; margin-bottom: 8px; }
     .responsibilities { margin-left: 20px; }
     .responsibilities li { margin-bottom: 6px; }
-
-    .education-item, .certification-item { margin-bottom: 12px; }
-
-    .skills-container { display: flex; flex-wrap: wrap; gap: 10px; }
-    .skill { background: var(--light-color); padding: 8px 14px; border-radius: 18px; font-size: .92rem; }
-
     .skill-category { margin-bottom: 14px; }
     .skill-category h3 { margin-bottom: 8px; color: var(--dark-color); }
-
+    .skills-container { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill { background: var(--light-color); padding: 8px 14px; border-radius: 18px; font-size: .92rem; }
     .languages { display: flex; gap: 20px; }
     .language { flex: 1; }
     .language-level { height: 10px; background: #ddd; border-radius: 5px; margin-top: 5px; position: relative; }
     .language-level::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; background: var(--secondary-color); border-radius: 5px; }
     .spanish::after { width: 100%; }
     .english::after { width: 80%; }
-
     footer { text-align: center; padding: 18px; color: #777; font-size: .9rem; }
 
     @media (max-width: 768px) {
@@ -112,37 +69,12 @@
       .contact-info div { justify-content: center; }
       .languages { flex-direction: column; }
       .personal-details { justify-content: center; }
+      .kpis { grid-template-columns: 1fr; }
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    @keyframes fadeInUp { from { opacity:0; transform: translateY(20px);} to { opacity:1; transform: translateY(0);} }
 
-    /* PDF Export Style Override */
-    .pdf-export {
-      --text-color: #333;
-    }
-    .pdf-export, .pdf-export * { animation: none !important; transition: none !important; }
-    /* Avoid awkward page breaks while exporting to PDF */
-    .pdf-export h2 { page-break-after: avoid; break-after: avoid-page; }
-    .pdf-export .experience-item,
-    .pdf-export .education-item,
-    .pdf-export .certification-item,
-    .pdf-export .skill-category { page-break-inside: avoid; break-inside: avoid-page; }
-    /* Education relies on h2 avoid rule; no forced break */
-    /* Skills page break handled by explicit .page-break element */
-    /* Explicit page-break element */
-    /*.page-break { display: none; }*/
-    .pdf-export .page-break { display: block; height: 0; page-break-before: always; break-before: page; }
-
-    /* Print-specific styles */
+    /* Print - MODIFICADO CON FUERZA DE COLOR */
     @media print {
       body { background-color: #fff; font-size: 10pt; }
       .container { box-shadow: none; border: none; width: 100%; max-width: 100%; }
@@ -150,28 +82,27 @@
       header { background: transparent !important; color: #000 !important; padding: 20px 0; }
       .title { color: #333 !important; }
       .profile-pic { border-color: #ccc !important; }
-      h2 {
-        color: #000 !important;
-        border-bottom-color: #000;
-      }
-      .summary, .skill { background: transparent !important; }
-      .skill {
-        border: 1px solid #ccc;
-        padding: 6px 12px;
-      }
+      h2 { color: #000 !important; border-bottom-color: #000; }
+      .summary, .skill, .kpi { background: transparent !important; border: 1px solid #ccc; }
       a { color: #000 !important; text-decoration: none; }
-      .language-level {
-        background: #eee;
+      
+      /* Forzar al navegador a mantener fondos y colores en la impresión */
+      .language-level { 
+        background: #eee !important; 
         border: 1px solid #ccc;
+        -webkit-print-color-adjust: exact; /* Chrome, Safari, Edge */
+        print-color-adjust: exact;         /* Estándar moderno Firefox */
       }
-      .language-level::after { background: #333 !important; }
+      .language-level::after { 
+        background: #333 !important; 
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
       footer { padding: 10px 0; }
-      /* Print fallback uses explicit .page-break element */
-      .page-break { display: block; height: 0; page-break-before: always; }
     }
   </style>
-  <link rel="stylesheet" href="lib/fontawesome/css/all.min.css">
-  <script src="lib/html2pdf.bundle.min.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -188,10 +119,12 @@
       </div>
 
       <div class="header-content">
-        <img src="foto/foto.JPG" alt="Foto de perfil" class="profile-pic" data-i18n-alt="alt.profilepic" crossorigin="anonymous">
+        <img src="foto/foto.JPG" alt="Foto de perfil" class="profile-pic" data-i18n-alt="alt.profilepic">
         <div class="personal-info">
           <h1 id="name">Jorge Ovidio Cordon Guzman</h1>
-          <div class="title" data-i18n="title">Systems Administrator</div>
+          <div class="title" data-i18n="title">
+            Technical Infrastructure Analyst / Systems Administrator — 20+ años garantizando disponibilidad & resiliencia (Windows Server, AD, VMware, SRM, PowerShell)
+          </div>
           <div class="personal-details">
             <div class="detail-item"><i class="fas fa-passport"></i><span data-i18n="nationality">Nacionalidad: Guatemalteco</span></div>
             <div class="detail-item"><i class="fas fa-birthday-cake"></i><span data-i18n="birthdate">Fecha de nacimiento: 02 de septiembre de 1976</span></div>
@@ -202,20 +135,52 @@
           <div><i class="fas fa-phone"></i><span id="phone">+502 30309570</span></div>
           <div><i class="fas fa-envelope"></i><span id="email">jorge.cordon@outlook.com</span></div>
           <div><i class="fab fa-linkedin"></i><a id="linkedin" href="https://www.linkedin.com/in/jorgecordon/" target="_blank" rel="noopener">linkedin.com/in/jorgecordon</a></div>
-          <div><i class="fas fa-award credly-icon"></i><a id="credly" href="https://www.credly.com/users/jorge-cordon" target="_blank" rel="noopener">Credly</a></div>
         </div>
       </div>
     </header>
 
     <section class="summary">
       <h2><i class="fas fa-user"></i><span data-i18n="section.summary">Resumen profesional</span></h2>
-      <p data-i18n="summary.text">
-        Administrador de sistemas con más de 20 años de experiencia en infraestructura. Experto en Windows Server, Active Directory, DNS y DHCP. Experiencia en VMware vSphere y vCenter, recuperación ante desastres con VMware SRM, automatización con PowerShell y soporte de hardware. Participación en proyectos con Azure AD, despliegue de VMs en Azure y fundamentos de AWS. Enfoque en resolución de incidentes, confiabilidad y entrega de proyectos.
+      <ul>
+        <li data-i18n="summary.l1">
+          Operación enterprise de 7,000 servidores Microsoft; VMware vSphere/vCenter con DR probado vía SRM y runbooks documentados para continuidad.
+        </li>
+        <li data-i18n="summary.l2">
+          Diseño e implementación de AD/DNS/DHCP/WSUS; automatización y reportería con PowerShell para estandarizar parches, inventario y cumplimiento.
+        </li>
+        <li data-i18n="summary.l3">
+          Plataforma & nube: VMWare, Nutanix, SAN (EMC/NetApp), backups Veritas y Azure AD/VMs; listo para migraciones a Windows Server 2025 y hardening.
+        </li>
+      </ul>
+      <p id="forward" style="margin-top:10px" data-i18n="summary.future">
+        En los próximos 90 días: normalizar GPO base, calendarizar parches críticos (WSUS/SCCM), y desplegar 3 automatizaciones PowerShell de mayor ROI.
       </p>
+    </section>
+
+    <section class="kpi-section">
+      <h2><i class="fas fa-bullseye"></i><span data-i18n="section.kpi">Indicadores clave (KPIs)</span></h2>
+      <div class="kpis">
+        <div class="kpi"><strong data-i18n="kpi1.t">Disponibilidad/SLA</strong><span data-i18n="kpi1.v">Operación continua de parque Windows multi-sede</span></div>
+        <div class="kpi"><strong data-i18n="kpi2.t">DR & Resiliencia</strong><span data-i18n="kpi2.v">Pruebas periódicas con VMware SRM y runbooks</span></div>
+        <div class="kpi"><strong data-i18n="kpi3.t">Estandarización</strong><span data-i18n="kpi3.v">WSUS/SCCM + PowerShell para parches/inventario</span></div>
+        <div class="kpi"><strong data-i18n="kpi4.t">Plataforma</strong><span data-i18n="kpi4.v">VMware, Nutanix, SAN (EMC/NetApp), Veritas</span></div>
+      </div>
     </section>
 
     <section class="experience">
       <h2><i class="fas fa-briefcase"></i><span data-i18n="section.experience">Experiencia laboral</span></h2>
+
+      <div class="experience-item">
+        <div class="job-title" data-i18n="exp_current.title">Ingeniero de Servicios</div>
+        <div class="company">Transforma Digital</div>
+        <div class="dates" data-i18n="exp_current.dates">Octubre 2025 – Presente</div>
+        <ul class="responsibilities">
+          <li data-i18n="exp_current.r1">Coordinación de soporte técnico con equipos de Nivel 1 (L1) y Nivel 2 (L2).</li>
+          <li data-i18n="exp_current.r2">Gestión y coordinación de proyectos tecnológicos de infraestructura de forma conjunta con clientes y el área comercial.</li>
+          <li data-i18n="exp_current.r3">Diseño e implementación del sistema de tickets corporativo para la optimización de la entrega de servicios.</li>
+          <li data-i18n="exp_current.r4">Monitoreo, seguimiento y aseguramiento del cumplimiento de acuerdos de nivel de servicio (SLAs) bajo las mejores prácticas de la industria.</li>
+        </ul>
+      </div>
 
       <div class="experience-item">
         <div class="job-title" data-i18n="exp1.title">Sales Support Engineer – Data Center Solutions</div>
@@ -223,9 +188,9 @@
         <div class="dates" data-i18n="exp1.dates">Febrero 2025 – Julio 2025</div>
         <ul class="responsibilities">
           <li data-i18n="exp1.r1">Soporte preventa para servidores, almacenamiento, HCI y virtualización</li>
-          <li data-i18n="exp1.r2">Dimensionamiento técnico y elaboración de BoM</li>
-          <li data-i18n="exp1.r3">Validación de soluciones según mejores prácticas y requerimientos</li>
-          <li data-i18n="exp1.r4">Presentaciones técnicas y demostraciones de producto</li>
+          <li data-i18n="exp1.r2">Dimensionamiento técnico y Bill of Materials (BoM)</li>
+          <li data-i18n="exp1.r3">Validación contra mejores prácticas y requerimientos</li>
+          <li data-i18n="exp1.r4">Presentaciones técnicas y demos de producto</li>
         </ul>
       </div>
 
@@ -234,12 +199,13 @@
         <div class="company">Atos Guatemala</div>
         <div class="dates" data-i18n="exp2.dates">Septiembre 2013 – Enero 2025</div>
         <ul class="responsibilities">
-          <li data-i18n="exp2.r1">Administración de Windows Server, AD, DNS y DHCP</li>
-          <li data-i18n="exp2.r2">Soporte de VMware vSphere/vCenter y pruebas de DR con SRM</li>
+          <li data-i18n="exp2.r1">Administración de Windows Server, Active Directory, DNS y DHCP</li>
+          <li data-i18n="exp2.r2">Soporte VMware vSphere/vCenter y pruebas de DR con SRM</li>
           <li data-i18n="exp2.r3">Automatización y reportería con PowerShell</li>
-          <li data-i18n="exp2.r4">Soporte de Nutanix</li>
+          <li data-i18n="exp2.r4">Soporte de VMware y Nutanix</li>
           <li data-i18n="exp2.r5">Participación en Azure AD y despliegue de VMs</li>
-          <li data-i18n="exp2.r6">Soporte de backup con Veritas/Symantec</li>
+          <li data-i18n="exp2.r6">Backups con Veritas/Symantec</li>
+          <li data-i18n="exp2.r7">Infraestructura de 7,000 servidores Microsoft</li>
         </ul>
       </div>
 
@@ -249,24 +215,20 @@
         <div class="dates" data-i18n="exp3.dates">Marzo 2009 – Septiembre 2013</div>
         <ul class="responsibilities">
           <li data-i18n="exp3.r1">Diseño e implementación de AD, DHCP, DNS y WSUS</li>
-          <li data-i18n="exp3.r2">Soporte de nivel avanzado en múltiples ubicaciones en Centro America</li>
+          <li data-i18n="exp3.r2">Soporte de nivel avanzado en múltiples ubicaciones</li>
           <li data-i18n="exp3.r3">Implementación de SCCM</li>
           <li data-i18n="exp3.r4">Administración SAN (EMC, NetApp)</li>
-          <li data-i18n="exp3.r5">Instalación, configuración y despliegue de actualizaciones a la infraestructura de servidores Windows</li>
-          <li data-i18n="exp3.r6">Instalación y despliegue de nuevas infraestructura</li>
-          <li data-i18n="exp3.r7">Implementación de proxy BlueCoat para todos los clientes</li>
         </ul>
       </div>
 
       <div class="experience-item">
         <div class="job-title" data-i18n="exp4.title">Server Administrator</div>
-        <div class="company">ManPower, S.A. (Wal‑Mart Centroamérica)</div>
+        <div class="company">ManPower, S.A. (Wal-Mart Centroamérica)</div>
         <div class="dates" data-i18n="exp4.dates">Marzo 2007 – Marzo 2009</div>
         <ul class="responsibilities">
           <li data-i18n="exp4.r1">Administración de 300 servidores Microsoft</li>
           <li data-i18n="exp4.r2">Gestión de Active Directory y Exchange</li>
-          <li data-i18n="exp4.r3">Monitoreo con MOM 2005</li>
-          <li data-i18n="exp4.r4">Despliegue y configuración de antivirus McAfee EPO</li>
+          <li data-i18n="exp4.r3">Monitoreo con MOM 2005 y EPO</li>
         </ul>
       </div>
 
@@ -275,7 +237,7 @@
         <div class="company">GRUPO SEGA, S.A.</div>
         <div class="dates" data-i18n="exp5.dates">Mayo 2006 – Marzo 2007</div>
         <ul class="responsibilities">
-          <li data-i18n="exp5.r1">Soporte 2 nivel para servidores, sistemas operativos y Exchange</li>
+          <li data-i18n="exp5.r1">Soporte a PC/servidores, sistemas operativos y Exchange</li>
           <li data-i18n="exp5.r2">Implementación y soporte de antivirus corporativos</li>
         </ul>
       </div>
@@ -313,41 +275,46 @@
 
     <section class="skills">
       <h2><i class="fas fa-tools"></i><span data-i18n="section.skills">Habilidades técnicas</span></h2>
-
       <div class="skill-category">
-        <h3 data-i18n="skills.os">Sistemas operativos</h3>
+        <h3 data-i18n="skills.must">MUST-HAVE</h3>
         <div class="skills-container">
-          <div class="skill">Windows Server 2008</div>
-          <div class="skill">Windows Server 2012</div>
-          <div class="skill">Windows Server 2016</div>
-          <div class="skill">Windows Server 2019</div>
-          <div class="skill">Windows Server 2022</div>
-          <div class="skill">Windows Server 2025</div>
-          <div class="skill">Windows 11</div>
-          <div class="skill">Linux (basic)</div>
-        </div>
-      </div>
-
-      <div class="skill-category">
-        <h3 data-i18n="skills.virt">Virtualización</h3>
-        <div class="skills-container">
-          <div class="skill">VMware vSphere/vCenter</div>
-          <div class="skill">VMware SRM</div>
-          <div class="skill">Nutanix</div>
-          <div class="skill">ProxMox</div>
-        </div>
-      </div>
-
-      <div class="skill-category">
-        <h3 data-i18n="skills.net">Infraestructura</h3>
-        <div class="skills-container">
+          <div class="skill">Windows Server 2008–2025</div>
           <div class="skill">Active Directory</div>
           <div class="skill">DNS</div>
           <div class="skill">DHCP</div>
+          <div class="skill">GPO</div>
           <div class="skill">WSUS</div>
+          <div class="skill">SCCM</div>
           <div class="skill">PowerShell</div>
+          <div class="skill">VMware vSphere/vCenter</div>
+          <div class="skill">VMware SRM (DR)</div>
+          <div class="skill">Veritas/Symantec Backups</div>
+          <div class="skill">Azure AD</div>
+          <div class="skill">Azure VMs</div>
+          <div class="skill">Nutanix</div>
+          <div class="skill">SAN (EMC/NetApp)</div>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3 data-i18n="skills.pref">PREFERRED</h3>
+        <div class="skills-container">
+          <div class="skill">SCOM</div>
+          <div class="skill">Veeam</div>
+          <div class="skill">ITIL</div>
+          <div class="skill">Hyper-V</div>
+          <div class="skill">Linux (intermedio)</div>
+          <div class="skill">Intune / Entra ID</div>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3 data-i18n="skills.bonus">BONUS</h3>
+        <div class="skills-container">
           <div class="skill">Power BI</div>
           <div class="skill">Power Automate</div>
+          <div class="skill">Preventa (sizing/BoM)</div>
+          <div class="skill">IBM Mainframe (Ops)</div>
         </div>
       </div>
     </section>
@@ -358,7 +325,7 @@
         <div class="language">
           <div data-i18n="lang.es">Español</div>
           <div class="language-level spanish"></div>
-          <div data-i1-n="lang.es.level">Nativo</div>
+          <div data-i18n="lang.es.level">Nativo</div>
         </div>
         <div class="language">
           <div data-i18n="lang.en">Inglés</div>
@@ -382,45 +349,60 @@
         'button.pdf': 'Descargar PDF',
         'alt.profilepic': 'Foto de perfil',
         'selector.label': 'Idioma',
-        title: 'Administrador de Sistemas',
+        title: 'Technical Infrastructure Analyst / Systems Administrator — 20+ años garantizando disponibilidad & resiliencia (Windows Server, AD, VMware, SRM, PowerShell)',
         nationality: 'Nacionalidad: Guatemalteco',
-        birthdate: 'Fecha de nacimiento: 02/sept/1976',
+        birthdate: 'Fecha de nacimiento: 02 de septiembre de 1976',
         birthplace: 'Lugar de nacimiento: Zacapa, Guatemala',
         'section.summary': 'Resumen profesional',
-        'summary.text': 'Administrador de sistemas con más de 20 años de experiencia en infraestructura. Experto en Windows Server, Active Directory, DNS y DHCP. Experiencia en VMware vSphere y vCenter, recuperación ante desastres con VMware SRM, automatización con PowerShell y soporte de hardware. Participación en proyectos con Azure AD, despliegue de VMs en Azure y fundamentos de AWS. Enfoque en resolución de incidentes, confiabilidad y entrega de proyectos.',
+        'summary.l1': 'Operación enterprise de 7,000 servidores Microsoft; VMware vSphere/vCenter con DR probado vía SRM y runbooks documentados para continuidad.',
+        'summary.l2': 'Diseño e implementación de AD/DNS/DHCP/WSUS; automatización y reportería con PowerShell para estandarizar parches, inventario y cumplimiento.',
+        'summary.l3': 'Plataforma & nube: VMware, Nutanix, SAN (EMC/NetApp), backups Veritas y Azure AD/VMs; listo para migraciones a Windows Server 2025 y hardening.',
+        'summary.future': 'En los próximos 90 días: normalizar GPO base, calendarizar parches críticos (WSUS/SCCM), y desplegar 3 automatizaciones PowerShell de mayor ROI.',
+        'section.kpi': 'Indicadores clave (KPIs)',
+        'kpi1.t': 'Disponibilidad/SLA',
+        'kpi1.v': 'Operación continua de parque Windows multi-sede',
+        'kpi2.t': 'DR & Resiliencia',
+        'kpi2.v': 'Pruebas periódicas con VMware SRM y runbooks',
+        'kpi3.t': 'Estandarización',
+        'kpi3.v': 'WSUS/SCCM + PowerShell para parches/inventario',
+        'kpi4.t': 'Plataforma',
+        'kpi4.v': 'VMware, Nutanix, SAN (EMC/NetApp), Veritas',
         'section.experience': 'Experiencia laboral',
+        'exp_current.title': 'Ingeniero de Servicios',
+        'exp_current.dates': 'Octubre 2025 – Presente',
+        'exp_current.r1': 'Coordinación de soporte técnico con equipos de Nivel 1 (L1) y Nivel 2 (L2).',
+        'exp_current.r2': 'Gestión y coordinación de proyectos tecnológicos de infraestructura de forma conjunta con clientes y el área comercial.',
+        'exp_current.r3': 'Diseño e implementación del sistema de tickets corporativo para la optimización de la entrega de servicios.',
+        'exp_current.r4': 'Monitoreo, seguimiento y aseguramiento del cumplimiento de acuerdos de nivel de servicio (SLAs) bajo las mejores prácticas de la industria.',
         'exp1.title': 'Sales Support Engineer – Data Center Solutions',
         'exp1.dates': 'Febrero 2025 – Julio 2025',
         'exp1.r1': 'Soporte preventa para servidores, almacenamiento, HCI y virtualización',
-        'exp1.r2': 'Dimensionamiento técnico y elaboración de BoM',
-        'exp1.r3': 'Validación de soluciones según mejores prácticas y requerimientos',
-        'exp1.r4': 'Presentaciones técnicas y demostraciones de producto',
+        'exp1.r2': 'Dimensionamiento técnico y Bill of Materials (BoM)',
+        'exp1.r3': 'Validación contra mejores prácticas y requerimientos',
+        'exp1.r4': 'Presentaciones técnicas y demos de producto',
         'exp2.title': 'Infrastructure Management Sr. Analyst (WSP)',
         'exp2.dates': 'Septiembre 2013 – Enero 2025',
-        'exp2.r1': 'Administración de Windows Server, AD, DNS y DHCP',
-        'exp2.r2': 'Soporte de VMware vSphere/vCenter y pruebas de DR con SRM',
+        'exp2.r1': 'Administración de Windows Server, Active Directory, DNS y DHCP',
+        'exp2.r2': 'Soporte VMware vSphere/vCenter y pruebas de DR con SRM',
         'exp2.r3': 'Automatización y reportería con PowerShell',
-        'exp2.r4': 'Soporte de Nutanix',
+        'exp2.r4': 'Soporte de VMware y Nutanix',
         'exp2.r5': 'Participación en Azure AD y despliegue de VMs',
-        'exp2.r6': 'Soporte de backup con Veritas/Symantec',
+        'exp2.r6': 'Backups con Veritas/Symantec',
+        'exp2.r7': 'Infraestructura de 7,000 servidores Microsoft',
         'exp3.title': 'Senior Server & Storage Administrator',
         'exp3.dates': 'Marzo 2009 – Septiembre 2013',
         'exp3.r1': 'Diseño e implementación de AD, DHCP, DNS y WSUS',
-        'exp3.r2': 'Soporte de nivel avanzado en múltiples ubicaciones en Centro America',
+        'exp3.r2': 'Soporte de nivel avanzado en múltiples ubicaciones',
         'exp3.r3': 'Implementación de SCCM',
         'exp3.r4': 'Administración SAN (EMC, NetApp)',
-        'exp3.r5': 'Instalación, configuración y despliegue de actualizaciones a la infraestructura de servidores Windows',
-        'exp3.r6': 'Instalación y despliegue de nuevas infraestructura',
-        'exp3.r7': 'Implementación de proxy BlueCoat para todos los clientes',
         'exp4.title': 'Server Administrator',
         'exp4.dates': 'Marzo 2007 – Marzo 2009',
         'exp4.r1': 'Administración de 300 servidores Microsoft',
         'exp4.r2': 'Gestión de Active Directory y Exchange',
-        'exp4.r3': 'Monitoreo con MOM 2005',
-        'exp4.r4': 'Despliegue y configuración de antivirus McAfee EPO',
+        'exp4.r3': 'Monitoreo con MOM 2005 y EPO',
         'exp5.title': 'Support Engineer',
         'exp5.dates': 'Mayo 2006 – Marzo 2007',
-        'exp5.r1': 'Soporte nivel 2 para servidores, sistemas operativos y Exchange',
+        'exp5.r1': 'Soporte a PC/servidores, sistemas operativos y Exchange',
         'exp5.r2': 'Implementación y soporte de antivirus corporativos',
         'section.education': 'Formación académica',
         'edu1.title': 'Administración de Empresas con Orientación en Computación',
@@ -436,59 +418,74 @@
         cert6: 'MS 70-290 Windows Server 2003',
         cert7: 'MS 70-270 Windows XP Professional',
         'section.skills': 'Habilidades técnicas',
-        'skills.os': 'Sistemas operativos',
-        'skills.virt': 'Virtualización',
-        'skills.net': 'Infraestructura',
+        'skills.must': 'MUST-HAVE',
+        'skills.pref': 'PREFERRED',
+        'skills.bonus': 'BONUS',
         'section.langs': 'Idiomas',
         'lang.es': 'Español',
         'lang.es.level': 'Nativo',
         'lang.en': 'Inglés',
-        'lang.en.level': 'Avanzado (B2/C1)',
+        'lang.en.level': 'Avanzado (C1)',
         updated: 'Actualizado'
       },
       en: {
         'button.pdf': 'Download PDF',
         'alt.profilepic': 'Profile picture',
         'selector.label': 'Language',
-        title: 'Systems Administrator',
+        title: 'Technical Infrastructure Analyst / Systems Administrator — 20+ years ensuring availability & resilience (Windows Server, AD, VMware, SRM, PowerShell)',
         nationality: 'Nationality: Guatemalan',
         birthdate: 'Date of birth: September 2, 1976',
         birthplace: 'Place of birth: Zacapa, Guatemala',
         'section.summary': 'Professional summary',
-        'summary.text': 'Systems Administrator with 20+ years of infrastructure experience. Expert in Windows Server, Active Directory, DNS and DHCP. Skilled with VMware vSphere and vCenter, disaster recovery using VMware SRM, PowerShell automation. Involved in Azure AD projects, Azure VM deployments, and AWS fundamentals. Focused on incident resolution, reliability, and project delivery.',
+        'summary.l1': 'Enterprise operation of 7,000 Microsoft servers; VMware vSphere/vCenter with SRM-tested DR and documented runbooks.',
+        'summary.l2': 'Designed and implemented AD/DNS/DHCP/WSUS; PowerShell automation/reporting to standardize patching, inventory and compliance.',
+        'summary.l3': 'Platform & cloud: VMware, Nutanix, SAN (EMC/NetApp), Veritas backups and Azure AD/VMs; ready for Windows Server 2025 migrations and hardening.',
+        'summary.future': 'Next 90 days: normalize baseline GPOs, schedule critical patching (WSUS/SCCM), and deliver 3 highest-ROI PowerShell automations.',
+        'section.kpi': 'Key Performance Indicators (KPIs)',
+        'kpi1.t': 'Availability/SLA',
+        'kpi1.v': '24×7 operation of multi-site Windows estate',
+        'kpi2.t': 'DR & Resilience',
+        'kpi2.v': 'Regular SRM drills with documented runbooks',
+        'kpi3.t': 'Standardization',
+        'kpi3.v': 'WSUS/SCCM + PowerShell for patching/inventory',
+        'kpi4.t': 'Platform',
+        'kpi4.v': 'VMware, Nutanix, SAN (EMC/NetApp), Veritas',
         'section.experience': 'Work experience',
+        'exp_current.title': 'Services Engineer',
+        'exp_current.dates': 'October 2025 – Present',
+        'exp_current.r1': 'Coordinated technical support with Level 1 (L1) and Level 2 (L2) engineering teams.',
+        'exp_current.r2': 'Managed and coordinated infrastructure tech projects in alignment with clients and commercial stakeholders.',
+        'exp_current.r3': 'Designed and implemented the corporate ticketing system to optimize IT service delivery.',
+        'exp_current.r4': 'Monitored, tracked, and enforced Service Level Agreements (SLAs) compliance following industry best practices.',
         'exp1.title': 'Sales Support Engineer – Data Center Solutions',
         'exp1.dates': 'February 2025 – July 2025',
-        'exp1.r1': 'Pre‑sales support for servers, storage, HCI, and virtualization',
-        'exp1.r2': 'Solution sizing and Bill of Materials (BoM)',
-        'exp1.r3': 'Solution validation against best practices and requirements',
+        'exp1.r1': 'Pre-sales support for servers, storage, HCI and virtualization',
+        'exp1.r2': 'Technical sizing and Bill of Materials (BoM)',
+        'exp1.r3': 'Validation against best practices and requirements',
         'exp1.r4': 'Technical presentations and product demos',
         'exp2.title': 'Infrastructure Management Sr. Analyst (WSP)',
         'exp2.dates': 'September 2013 – January 2025',
-        'exp2.r1': 'Windows Server, AD, DNS and DHCP administration',
-        'exp2.r2': 'VMware vSphere/vCenter support and DR testing with SRM',
+        'exp2.r1': 'Windows Server, Active Directory, DNS and DHCP administration',
+        'exp2.r2': 'VMware vSphere/vCenter support and SRM DR testing',
         'exp2.r3': 'Automation and reporting with PowerShell',
-        'exp2.r4': 'Nutanix support',
-        'exp2.r5': 'Azure AD administration and VM deployments',
-        'exp2.r6': 'Backup support with Veritas/Symantec',
+        'exp2.r4': 'VMware and Nutanix support',
+        'exp2.r5': 'Azure AD participation and VM deployments',
+        'exp2.r6': 'Backups with Veritas/Symantec',
+        'exp2.r7': 'Environment with 7,000 Microsoft servers',
         'exp3.title': 'Senior Server & Storage Administrator',
         'exp3.dates': 'March 2009 – September 2013',
-        'exp3.r1': 'Designed and implemented AD, DHCP, DNS, and WSUS',
-        'exp3.r2': 'Tier‑3 support across multiple branches across Central America',
+        'exp3.r1': 'Designed and implemented AD, DHCP, DNS and WSUS',
+        'exp3.r2': 'Advanced support across multiple sites',
         'exp3.r3': 'SCCM implementation',
         'exp3.r4': 'SAN administration (EMC, NetApp)',
-        'exp3.r5': 'Install, configure and deploy of updates to the Windows servers infrastructure',
-        'exp3.r6': 'Install and deploy new infrastructure',
-        'exp3.r7': 'BlueCoat proxy implementation for all the clients',
         'exp4.title': 'Server Administrator',
         'exp4.dates': 'March 2007 – March 2009',
         'exp4.r1': 'Administration of 300 Microsoft servers',
         'exp4.r2': 'Active Directory and Exchange management',
-        'exp4.r3': 'Monitoring with MOM 2005',
-        'exp4.r4': 'Deploy and configure of McAfee EPO antivirus',
+        'exp4.r3': 'Monitoring with MOM 2005 and EPO',
         'exp5.title': 'Support Engineer',
         'exp5.dates': 'May 2006 – March 2007',
-        'exp5.r1': 'Tier 2 support for servers, operating systems, and Exchange',
+        'exp5.r1': 'Support for PCs/servers, operating systems and Exchange',
         'exp5.r2': 'Corporate antivirus implementation and support',
         'section.education': 'Education',
         'edu1.title': 'Business Administration with Computer Orientation',
@@ -504,25 +501,24 @@
         cert6: 'MS 70-290 Windows Server 2003',
         cert7: 'MS 70-270 Windows XP Professional',
         'section.skills': 'Technical skills',
-        'skills.os': 'Operating systems',
-        'skills.virt': 'Virtualización',
-        'skills.net': 'Infrastructure',
+        'skills.must': 'MUST-HAVE',
+        'skills.pref': 'PREFERRED',
+        'skills.bonus': 'BONUS',
         'section.langs': 'Languages',
         'lang.es': 'Spanish',
         'lang.es.level': 'Native',
         'lang.en': 'English',
-        'lang.en.level': 'Advanced (B2/C1)',
+        'lang.en.level': 'Advanced (C1)',
         updated: 'Updated'
       }
     };
- 
+
     function setLang(lang) {
       const dict = translations[lang] || translations.es;
       $$('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (dict[key] !== undefined) el.textContent = dict[key];
       });
-      // Also translate attributes like 'alt'
       $$('[data-i18n-alt]').forEach(el => {
         const key = el.getAttribute('data-i18n-alt');
         if (dict[key] !== undefined) el.alt = dict[key];
@@ -530,46 +526,13 @@
       document.documentElement.lang = lang;
       localStorage.setItem('cv_lang', lang);
 
-      // Update date format based on new language
       const now = new Date();
       const dateLocale = lang === 'en' ? 'en-US' : 'es-GT';
       const fmt = new Intl.DateTimeFormat(dateLocale, { year: 'numeric', month: 'long' });
       $('#updated-date').textContent = fmt.format(now);
     }
 
-    // Ensure html2pdf is available; attempt lazy-load if missing
-    function ensureHtml2Pdf() {
-      return new Promise((resolve, reject) => {
-        if (window.html2pdf) return resolve();
-
-        // Load only local copy
-        const existing = document.querySelector('script[data-dynamic-html2pdf]');
-        if (existing) {
-          existing.addEventListener('load', () => window.html2pdf ? resolve() : reject(new Error('html2pdf not available after load')));
-          existing.addEventListener('error', () => reject(new Error('Failed to load html2pdf')));
-          return;
-        }
-
-        const s = document.createElement('script');
-        s.src = 'lib/html2pdf.bundle.min.js';
-        s.defer = true;
-        s.setAttribute('data-dynamic-html2pdf', '');
-        s.onload = () => window.html2pdf ? resolve() : reject(new Error('html2pdf not available after load'));
-        s.onerror = () => reject(new Error('Failed to load local html2pdf'));
-        document.head.appendChild(s);
-      });
-    }
-
-    function waitForImages(root=document) {
-      const imgs = Array.from(root.querySelectorAll('img'));
-      const pending = imgs.filter(img => !img.complete || img.naturalWidth === 0);
-      if (!pending.length) return Promise.resolve();
-      return Promise.all(pending.map(img => new Promise(res => {
-        img.onload = img.onerror = () => res();
-      })));
-    }
-
-    async function generatePdf() {
+    function generatePdf() {
       const lang = $('#lang').value;
       const name = $('#name').textContent.trim();
       const date = new Date().toISOString().slice(0, 10);
@@ -577,57 +540,42 @@
 
       const element = $('.container');
       const headerControls = $('.header-top');
-      const pdfButton = $('#download-pdf');
-      const originalButtonText = pdfButton.textContent;
 
-      // --- Pre-generation setup ---
-      pdfButton.disabled = true;
-      pdfButton.textContent = lang === 'en' ? 'Generating...' : 'Generando...';
-      
-      // Add class to force solid colors and hide controls
-      document.body.classList.add('pdf-export');
-      element.classList.add('exporting');
       headerControls.style.display = 'none';
 
       const opt = {
-        margin:       [0.5, 0.5, 0.5, 0.5],
-        filename:     filename,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  {
-            scale: 2,
-            useCORS: true,
-            allowTaint: true,
-            logging: true,
-            backgroundColor: '#ffffff'
+        margin: [0.3, 0.3, 0.3, 0.3],
+        filename,
+        image: { type: 'jpeg', quality: 0.95 },
+        html2canvas: { 
+          scale: 2, 
+          useCORS: false, 
+          allowTaint: true, 
+          letterRendering: true
         },
-        pagebreak:    { mode: ['css'] },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
 
-      // --- Generate PDF and then restore the view ---
+      const originalOpacity = element.style.opacity;
+      element.style.opacity = '1';
+
       try {
-        // Make sure the library is present
-        await ensureHtml2Pdf();
-        await waitForImages(element);
-        // small delay to let reflow settle after hiding controls
-        await new Promise(r => setTimeout(r, 50));
-        if (!window.html2pdf) throw new Error('html2pdf is not available');
-        await html2pdf().set(opt).from(element).save();
-      } catch (err) {
-        console.error("PDF generation failed:", err);
-        const msg = lang === 'en'
-          ? 'There was an error generating the PDF. Please check your internet connection (to load the PDF library) and try again.'
-          : 'Hubo un error al generar el PDF. Verifica tu conexión a internet (para cargar la librería de PDF) y vuelve a intentarlo.';
-        alert(msg);
-        // Fallback to browser print as an alternative PDF generation
-        try { window.print(); } catch (_) {}
-      } finally {
-        // Restore view
-        document.body.classList.remove('pdf-export');
-        element.classList.remove('exporting');
+        html2pdf().set(opt).from(element).save()
+          .then(() => {
+            headerControls.style.display = 'flex';
+            element.style.opacity = originalOpacity;
+          })
+          .catch(err => {
+            console.error("Error interno de html2pdf, recurriendo a print nativo:", err);
+            window.print();
+            headerControls.style.display = 'flex';
+            element.style.opacity = originalOpacity;
+          });
+      } catch (e) {
+        console.error("Excepción detectada, recurriendo a print nativo:", e);
+        window.print();
         headerControls.style.display = 'flex';
-        pdfButton.disabled = false;
-        pdfButton.textContent = originalButtonText;
+        element.style.opacity = originalOpacity;
       }
     }
 
@@ -635,14 +583,11 @@
       const saved = localStorage.getItem('cv_lang');
       const select = $('#lang');
       if (saved && translations[saved]) {
-        select.value = saved;
-        setLang(saved);
+        select.value = saved; setLang(saved);
       } else {
-        // Auto based on browser
         const browser = (navigator.language || 'es').slice(0,2);
         const lang = translations[browser] ? browser : 'es';
-        select.value = lang;
-        setLang(lang);
+        select.value = lang; setLang(lang);
       }
       select.addEventListener('change', e => setLang(e.target.value));
       $('#download-pdf').addEventListener('click', generatePdf);
@@ -652,5 +597,3 @@
   </script>
 </body>
 </html>
-
-
