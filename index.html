@@ -41,6 +41,7 @@
     h2 { color: var(--secondary-color); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-color); display: flex; align-items: center; gap: 8px; }
     .summary { background: var(--light-color); padding: 18px; border-radius: 8px; }
     .summary ul { margin-left: 20px; }
+    .summary ul li { margin-bottom: 6px; }
     .kpis { display: grid; grid-template-columns: repeat(2, minmax(240px,1fr)); gap: 12px; }
     .kpi { background: var(--light-color); border-radius: 10px; padding: 10px 14px; }
     .kpi strong { display:block; font-size:.95rem; color: var(--dark-color); }
@@ -74,7 +75,7 @@
 
     @keyframes fadeInUp { from { opacity:0; transform: translateY(20px);} to { opacity:1; transform: translateY(0);} }
 
-    /* Print - MODIFICADO CON FUERZA DE COLOR */
+    /* Print - FORZAR COLORES */
     @media print {
       body { background-color: #fff; font-size: 10pt; }
       .container { box-shadow: none; border: none; width: 100%; max-width: 100%; }
@@ -86,7 +87,6 @@
       .summary, .skill, .kpi { background: transparent !important; border: 1px solid #ccc; }
       a { color: #000 !important; text-decoration: none; }
       
-      /* Forzar al navegador a mantener fondos y colores en la impresión */
       .language-level { 
         background: #eee !important; 
         border: 1px solid #ccc;
@@ -141,9 +141,12 @@
 
     <section class="summary">
       <h2><i class="fas fa-user"></i><span data-i18n="section.summary">Resumen profesional</span></h2>
-      <p data-i18n="summary.text">
-        Administrador de sistemas con más de 20 años de experiencia en infraestructura. Experto en Windows Server, Active Directory, DNS y DHCP. Experiencia en VMware vSphere y vCenter, recuperación ante desastres con VMware SRM, automatización con PowerShell y soporte de hardware. Participación en proyectos con Azure AD, despliegue de VMs en Azure y fundamentos de AWS. Enfoque en resolución de incidentes, confiabilidad y entrega de proyectos.
-      </p>
+      <ul>
+        <li data-i18n="summary.l1">Administrador de Sistemas e Infraestructura con más de 20 años de experiencia liderando la continuidad operativa, disponibilidad y resiliencia de centros de datos enterprise (entornos de hasta 7,000 servidores).</li>
+        <li data-i18n="summary.l2">Especialista en el ecosistema Microsoft clásico y de nube (Windows Server, Active Directory avanzado, DNS, DHCP, GPOs, WSUS, Azure AD y despliegue de VMs) y entornos core de virtualización en plataformas VMware vSphere/vCenter.</li>
+        <li data-i18n="summary.l3">Sólida trayectoria en mitigación de riesgos de negocio mediante automatización robusta con PowerShell e implementación de estrategias completas de Disaster Recovery (DR) validadas con runbooks operativos y VMware SRM.</li>
+        <li data-i18n="summary.l4">Experiencia actual robusta en la Gestión de Servicios e Ingeniería de Soporte; coordinando equipos de ingeniería L1/L2, controlando SLAs bajo mejores prácticas de ITIL e implementando arquitecturas corporativas de ticketing.</li>
+      </ul>
     </section>
 
     <section class="kpi-section">
@@ -343,7 +346,10 @@
         birthdate: 'Fecha de nacimiento: 02 de septiembre de 1976',
         birthplace: 'Lugar de nacimiento: Zacapa, Guatemala',
         'section.summary': 'Resumen profesional',
-        'summary.text': 'Administrador de sistemas con más de 20 años de experiencia en infraestructura. Experto en Windows Server, Active Directory, DNS y DHCP. Experiencia en VMware vSphere y vCenter, recuperación ante desastres con VMware SRM, automatización con PowerShell y soporte de hardware. Participación en proyectos con Azure AD, despliegue de VMs en Azure y fundamentos de AWS. Enfoque en resolución de incidentes, confiabilidad y entrega de proyectos.',
+        'summary.l1': 'Administrador de Sistemas e Infraestructura con más de 20 años de experiencia liderando la continuidad operativa, disponibilidad y resiliencia de centros de datos enterprise (entornos de hasta 7,000 servidores).',
+        'summary.l2': 'Especialista en el ecosistema Microsoft clásico y de nube (Windows Server, Active Directory avanzado, DNS, DHCP, GPOs, WSUS, Azure AD y despliegue de VMs) y entornos core de virtualización en plataformas VMware vSphere/vCenter.',
+        'summary.l3': 'Sólida trayectoria en mitigación de riesgos de negocio mediante automatización robusta con PowerShell e implementación de estrategias completas de Disaster Recovery (DR) validadas con runbooks operativos y VMware SRM.',
+        'summary.l4': 'Experiencia actual robusta en la Gestión de Servicios e Ingeniería de Soporte; coordinando equipos de ingeniería L1/L2, controlando SLAs bajo mejores prácticas de ITIL e implementando arquitecturas corporativas de ticketing.',
         'section.kpi': 'Indicadores clave (KPIs)',
         'kpi1.t': 'Disponibilidad/SLA',
         'kpi1.v': 'Operación continua de parque Windows multi-sede',
@@ -423,7 +429,10 @@
         birthdate: 'Date of birth: September 2, 1976',
         birthplace: 'Place of birth: Zacapa, Guatemala',
         'section.summary': 'Professional summary',
-        'summary.text': 'Systems Administrator with 20+ years of infrastructure experience. Expert in Windows Server, Active Directory, DNS and DHCP. Skilled with VMware vSphere and vCenter, disaster recovery using VMware SRM, PowerShell automation. Involved in Azure AD projects, Azure VM deployments, and AWS fundamentals. Focused on incident resolution, reliability, and project delivery.',
+        'summary.l1': 'Systems & Infrastructure Administrator with 20+ years of experience driving operational continuity, high availability, and resilience across enterprise-level data centers (managing environments up to 7,000 servers).',
+        'summary.l2': 'Expertise spanning the on-premise and cloud Microsoft ecosystem (Windows Server, advanced Active Directory, DNS, DHCP, GPOs, WSUS, Azure AD, and VM deployments) paired with core virtualization on VMware vSphere/vCenter platforms.',
+        'summary.l3': 'Proven track record in business risk mitigation through robust PowerShell automation scripting and full Disaster Recovery (DR) strategy execution validated by operative runbooks and VMware SRM.',
+        'summary.l4': 'Strong current experience in Service Delivery and Support Engineering; coordinating L1/L2 technical teams, managing strict SLA compliance under ITIL frameworks, and designing corporate ticketing workflows.',
         'section.kpi': 'Key Performance Indicators (KPIs)',
         'kpi1.t': 'Availability/SLA',
         'kpi1.v': '24×7 operation of multi-site Windows estate',
@@ -442,7 +451,7 @@
         'exp_current.r4': 'Monitored, tracked, and enforced Service Level Agreements (SLAs) compliance following industry best practices.',
         'exp1.title': 'Sales Support Engineer – Data Center Solutions',
         'exp1.dates': 'February 2025 – July 2025',
-        'exp1.r1': 'Pre‑sales support for servers, storage, HCI, and virtualization',
+        'exp1.r1': 'Pre-sales support for servers, storage, HCI, and virtualization',
         'exp1.r2': 'Solution sizing and Bill of Materials (BoM)',
         'exp1.r3': 'Solution validation against best practices and requirements',
         'exp1.r4': 'Technical presentations and product demos',
@@ -458,7 +467,7 @@
         'exp3.title': 'Senior Server & Storage Administrator',
         'exp3.dates': 'March 2009 – September 2013',
         'exp3.r1': 'Designed and implemented AD, DHCP, DNS, and WSUS',
-        'exp3.r2': 'Tier‑3 support across multiple branches across Central America',
+        'exp3.r2': 'Tier-3 support across multiple branches across Central America',
         'exp3.r3': 'SCCM implementation',
         'exp3.r4': 'SAN administration (EMC, NetApp)',
         'exp4.title': 'Server Administrator',
