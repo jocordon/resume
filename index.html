@@ -90,8 +90,8 @@
       .language-level { 
         background: #eee !important; 
         border: 1px solid #ccc;
-        -webkit-print-color-adjust: exact; /* Chrome, Safari, Edge */
-        print-color-adjust: exact;         /* Estándar moderno Firefox */
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
       .language-level::after { 
         background: #333 !important; 
@@ -141,19 +141,8 @@
 
     <section class="summary">
       <h2><i class="fas fa-user"></i><span data-i18n="section.summary">Resumen profesional</span></h2>
-      <ul>
-        <li data-i18n="summary.l1">
-          Operación enterprise de 7,000 servidores Microsoft; VMware vSphere/vCenter con DR probado vía SRM y runbooks documentados para continuidad.
-        </li>
-        <li data-i18n="summary.l2">
-          Diseño e implementación de AD/DNS/DHCP/WSUS; automatización y reportería con PowerShell para estandarizar parches, inventario y cumplimiento.
-        </li>
-        <li data-i18n="summary.l3">
-          Plataforma & nube: VMWare, Nutanix, SAN (EMC/NetApp), backups Veritas y Azure AD/VMs; listo para migraciones a Windows Server 2025 y hardening.
-        </li>
-      </ul>
-      <p id="forward" style="margin-top:10px" data-i18n="summary.future">
-        En los próximos 90 días: normalizar GPO base, calendarizar parches críticos (WSUS/SCCM), y desplegar 3 automatizaciones PowerShell de mayor ROI.
+      <p data-i18n="summary.text">
+        Administrador de sistemas con más de 20 años de experiencia en infraestructura. Experto en Windows Server, Active Directory, DNS y DHCP. Experiencia en VMware vSphere y vCenter, recuperación ante desastres con VMware SRM, automatización con PowerShell y soporte de hardware. Participación en proyectos con Azure AD, despliegue de VMs en Azure y fundamentos de AWS. Enfoque en resolución de incidentes, confiabilidad y entrega de proyectos.
       </p>
     </section>
 
@@ -354,10 +343,7 @@
         birthdate: 'Fecha de nacimiento: 02 de septiembre de 1976',
         birthplace: 'Lugar de nacimiento: Zacapa, Guatemala',
         'section.summary': 'Resumen profesional',
-        'summary.l1': 'Operación enterprise de 7,000 servidores Microsoft; VMware vSphere/vCenter con DR probado vía SRM y runbooks documentados para continuidad.',
-        'summary.l2': 'Diseño e implementación de AD/DNS/DHCP/WSUS; automatización y reportería con PowerShell para estandarizar parches, inventario y cumplimiento.',
-        'summary.l3': 'Plataforma & nube: VMware, Nutanix, SAN (EMC/NetApp), backups Veritas y Azure AD/VMs; listo para migraciones a Windows Server 2025 y hardening.',
-        'summary.future': 'En los próximos 90 días: normalizar GPO base, calendarizar parches críticos (WSUS/SCCM), y desplegar 3 automatizaciones PowerShell de mayor ROI.',
+        'summary.text': 'Administrador de sistemas con más de 20 años de experiencia en infraestructura. Experto en Windows Server, Active Directory, DNS y DHCP. Experiencia en VMware vSphere y vCenter, recuperación ante desastres con VMware SRM, automatización con PowerShell y soporte de hardware. Participación en proyectos con Azure AD, despliegue de VMs en Azure y fundamentos de AWS. Enfoque en resolución de incidentes, confiabilidad y entrega de proyectos.',
         'section.kpi': 'Indicadores clave (KPIs)',
         'kpi1.t': 'Disponibilidad/SLA',
         'kpi1.v': 'Operación continua de parque Windows multi-sede',
@@ -437,10 +423,7 @@
         birthdate: 'Date of birth: September 2, 1976',
         birthplace: 'Place of birth: Zacapa, Guatemala',
         'section.summary': 'Professional summary',
-        'summary.l1': 'Enterprise operation of 7,000 Microsoft servers; VMware vSphere/vCenter with SRM-tested DR and documented runbooks.',
-        'summary.l2': 'Designed and implemented AD/DNS/DHCP/WSUS; PowerShell automation/reporting to standardize patching, inventory and compliance.',
-        'summary.l3': 'Platform & cloud: VMware, Nutanix, SAN (EMC/NetApp), Veritas backups and Azure AD/VMs; ready for Windows Server 2025 migrations and hardening.',
-        'summary.future': 'Next 90 days: normalize baseline GPOs, schedule critical patching (WSUS/SCCM), and deliver 3 highest-ROI PowerShell automations.',
+        'summary.text': 'Systems Administrator with 20+ years of infrastructure experience. Expert in Windows Server, Active Directory, DNS and DHCP. Skilled with VMware vSphere and vCenter, disaster recovery using VMware SRM, PowerShell automation. Involved in Azure AD projects, Azure VM deployments, and AWS fundamentals. Focused on incident resolution, reliability, and project delivery.',
         'section.kpi': 'Key Performance Indicators (KPIs)',
         'kpi1.t': 'Availability/SLA',
         'kpi1.v': '24×7 operation of multi-site Windows estate',
@@ -459,33 +442,33 @@
         'exp_current.r4': 'Monitored, tracked, and enforced Service Level Agreements (SLAs) compliance following industry best practices.',
         'exp1.title': 'Sales Support Engineer – Data Center Solutions',
         'exp1.dates': 'February 2025 – July 2025',
-        'exp1.r1': 'Pre-sales support for servers, storage, HCI and virtualization',
-        'exp1.r2': 'Technical sizing and Bill of Materials (BoM)',
-        'exp1.r3': 'Validation against best practices and requirements',
+        'exp1.r1': 'Pre‑sales support for servers, storage, HCI, and virtualization',
+        'exp1.r2': 'Solution sizing and Bill of Materials (BoM)',
+        'exp1.r3': 'Solution validation against best practices and requirements',
         'exp1.r4': 'Technical presentations and product demos',
         'exp2.title': 'Infrastructure Management Sr. Analyst (WSP)',
         'exp2.dates': 'September 2013 – January 2025',
-        'exp2.r1': 'Windows Server, Active Directory, DNS and DHCP administration',
-        'exp2.r2': 'VMware vSphere/vCenter support and SRM DR testing',
+        'exp2.r1': 'Windows Server, AD, DNS and DHCP administration',
+        'exp2.r2': 'VMware vSphere/vCenter support and DR testing with SRM',
         'exp2.r3': 'Automation and reporting with PowerShell',
-        'exp2.r4': 'VMware and Nutanix support',
-        'exp2.r5': 'Azure AD participation and VM deployments',
-        'exp2.r6': 'Backups with Veritas/Symantec',
+        'exp2.r4': 'Nutanix support',
+        'exp2.r5': 'Azure AD administration and VM deployments',
+        'exp2.r6': 'Backup support with Veritas/Symantec',
         'exp2.r7': 'Environment with 7,000 Microsoft servers',
         'exp3.title': 'Senior Server & Storage Administrator',
         'exp3.dates': 'March 2009 – September 2013',
-        'exp3.r1': 'Designed and implemented AD, DHCP, DNS and WSUS',
-        'exp3.r2': 'Advanced support across multiple sites',
+        'exp3.r1': 'Designed and implemented AD, DHCP, DNS, and WSUS',
+        'exp3.r2': 'Tier‑3 support across multiple branches across Central America',
         'exp3.r3': 'SCCM implementation',
         'exp3.r4': 'SAN administration (EMC, NetApp)',
         'exp4.title': 'Server Administrator',
         'exp4.dates': 'March 2007 – March 2009',
         'exp4.r1': 'Administration of 300 Microsoft servers',
         'exp4.r2': 'Active Directory and Exchange management',
-        'exp4.r3': 'Monitoring with MOM 2005 and EPO',
+        'exp4.r3': 'Monitoring with MOM 2005',
         'exp5.title': 'Support Engineer',
         'exp5.dates': 'May 2006 – March 2007',
-        'exp5.r1': 'Support for PCs/servers, operating systems and Exchange',
+        'exp5.r1': 'Tier 2 support for servers, operating systems, and Exchange',
         'exp5.r2': 'Corporate antivirus implementation and support',
         'section.education': 'Education',
         'edu1.title': 'Business Administration with Computer Orientation',
